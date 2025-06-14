@@ -13,7 +13,7 @@ License:	%{license}
 URL:		%{urlpath}
 
 BuildRequires:	curl
-Requires:	desktop-file-utils
+Requires:	desktop-file-utils libbsd glibc libX11-xcb libX11 libXau libxcb libXdmcp libxkbcommon zlib-ng-compat
 
 %description
 This package contains a repackaged version of %{name}, downloaded directly
@@ -34,15 +34,13 @@ popd
 PKG_BUILD="%{_builddir}/zed.app"
 PKG_NAME="%{name}"
 PKG_BIN="%{buildroot}%{_bindir}"
-PKG_LIB="%{buildroot}%{_libdir}"
 PKG_LIBEXEC="%{buildroot}%{_libexecdir}"
 PKG_APPS="%{buildroot}%{_datadir}/applications"
 PKG_ICONS="%{buildroot}%{_datadir}/icons"
 PKG_DOCS="%{buildroot}%{docdir}"
-install -d $PKG_BIN $PKG_LIB $PKG_LIBEXEC $PKG_APPS $PKG_DOCS $PKG_ICONS
+install -d $PKG_BIN $PKG_LIBEXEC $PKG_APPS $PKG_DOCS $PKG_ICONS
 install -m 755 -t "$PKG_BIN" $PKG_BUILD/bin/*
 install -m 755 -t "$PKG_LIBEXEC" $PKG_BUILD/libexec/*
-install -m 644 -t "$PKG_LIB" $PKG_BUILD/lib/*
 install -m 644 -t "$PKG_APPS" $PKG_BUILD/share/applications/*
 install -m 644 -t "$PKG_DOCS" $PKG_BUILD/licenses.md
 cp -a $PKG_BUILD/share/icons/* $PKG_ICONS
@@ -74,17 +72,6 @@ fi
 %files
 %{_bindir}/zed
 %{_libexecdir}/zed-editor
-%{_libdir}/libbsd.so.0
-%{_libdir}/libxkbcommon-x11.so.0
-%{_libdir}/libX11.so.6
-%{_libdir}/libX11-xcb.so.1
-%{_libdir}/libutil.so.1
-%{_libdir}/libxcb-xkb.so.1
-%{_libdir}/libz.so.1
-%{_libdir}/libxkbcommon.so.0
-%{_libdir}/libXau.so.6
-%{_libdir}/libXdmcp.so.6
-%{_libdir}/libxcb.so.1
 %{_datadir}/applications/zed.desktop
 %{docdir}/licenses.md
 %{_datadir}/icons/hicolor/512x512/apps/zed.png
